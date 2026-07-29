@@ -1,0 +1,31 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+  typeName:       'Booking',
+  typeNamePlural: 'Bookings',
+  typeImageUrl:   'sap-icon://sales-order',
+  title:       { type: #STANDARD, value: 'BookingId' },
+  description: { type: #STANDARD, value: 'Description' }
+}
+annotate entity ZC_BOOKING_T35 with
+{
+  @EndUserText.label: 'Booking ID'
+  @UI.lineItem:       [{ position: 10, importance: #HIGH }]
+  BookingId;
+
+  @EndUserText.label: 'Customer'
+  @UI.lineItem:       [{ position: 20, importance: #HIGH }]
+  CustomerId;
+
+  @EndUserText.label: 'Booking Date'
+  @UI.lineItem:       [{ position: 30 }]
+  BookingDate;
+
+  @EndUserText.label: 'Total Price'
+  @UI.lineItem:       [{ position: 50 }]
+  TotalPrice;
+
+  @EndUserText.label: 'Description'
+  @UI.lineItem:       [{ position: 90, importance: #LOW }]
+  Description;
+
+}

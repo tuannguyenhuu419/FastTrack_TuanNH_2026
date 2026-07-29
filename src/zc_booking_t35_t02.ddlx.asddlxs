@@ -1,0 +1,13 @@
+@Metadata.layer: #CORE
+annotate entity ZC_BOOKING_T35 with
+{
+  @Search.defaultSearchElement: true
+  @Search.fuzzinessThreshold: 0.8
+  BookingId;
+
+  @Search.defaultSearchElement: true
+  CustomerId;
+
+  @Search.defaultSearchElement: true
+  CustomerName;
+}
