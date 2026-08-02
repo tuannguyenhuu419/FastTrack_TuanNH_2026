@@ -1,7 +1,7 @@
 {
-  "name": "booking",
+  "name": "fasttrack",
   "version": "0.0.1",
-  "description": "An Booking Manage App",
+  "description": "Booking Management",
   "keywords": [
     "ui5",
     "openui5",

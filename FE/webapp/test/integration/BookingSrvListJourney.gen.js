@@ -24,6 +24,8 @@ sap.ui.define([
     function journey() {
         QUnit.module("BookingSrvListListReport journey");
 
+        const defaultTableId = "";
+
         opaTest("Start application", function (Given, When, Then) {
             Given.iStartMyApp();
 
@@ -31,61 +33,54 @@ sap.ui.define([
         });
 
         opaTest("Check filter bar", function (Given, When, Then) {
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("Customer");
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("Booking Date");
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("Status");
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("City");
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("Confirmed");
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("Priority");
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "CustomerId" });
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "BookingDate" });
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "OverallStatus" });
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "CustomerCity" });
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "ConfirmFlag" });
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "Priority" });
         });
 
         opaTest("Add semantic key properties to filter bar", function (Given, When, Then) {
-            Then.onTheBookingSrvListGenerated.onFilterBar().iOpenFilterAdaptation();
-            When.onTheBookingSrvListGenerated.onFilterBar().iAddAdaptationFilterField("Booking ID");
-            Then.onTheBookingSrvListGenerated.onFilterBar().iConfirmFilterAdaptation();
-            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField("Booking ID");
-            // Then.onTheBookingSrvListGenerated.onFilterBar().iChangeFilterField("Booking ID");
-            // Then.onTheBookingSrvListGenerated.onFilterBar().iExecuteSearch();
-            // Then.onTheBookingSrvListGenerated.onTable().iCheckRows();
-            // Then.onTheBookingSrvListGenerated.onTable().iSelectRows(0);
-            // Then.onTheBookingSrvListGenerated.onTable().iCheckAction("<Action Name>", { enabled: true });
+            When.onTheBookingSrvListGenerated.onFilterBar().iOpenFilterAdaptation();
+            When.onTheBookingSrvListGenerated.onFilterBar().iAddAdaptationFilterField({ property: "BookingId" });
+            When.onTheBookingSrvListGenerated.onFilterBar().iConfirmFilterAdaptation();
+            Then.onTheBookingSrvListGenerated.onFilterBar().iCheckFilterField({ property: "BookingId" });
+            // When.onTheBookingSrvListGenerated.onFilterBar().iChangeFilterField({ property: "BookingId" }, "<value to filter>", false);
+            // When.onTheBookingSrvListGenerated.onFilterBar().iExecuteSearch();
+            // Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckRows();
+            // When.onTheBookingSrvListGenerated.onTable(defaultTableId).iSelectRows(0);
+            // Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckAction("<Action Name>", { enabled: true });
         });
 
         // Note: this test will only work if the ListReport page has a search field and shows data that matches the search term. Please ensure that the test data and search term are set up accordingly.
         // opaTest("Perform a global search and check the result", function (Given, When, Then) {
         //     When.onTheBookingSrvListGenerated.onFilterBar().iChangeSearchField("Search Term");
         //     When.onTheBookingSrvListGenerated.onFilterBar().iExecuteSearch();
-        //     Then.onTheBookingSrvListGenerated.onTable().iCheckRows();
+        //     Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckRows();
         // });
 
         opaTest("Check table columns and actions", function (Given, When, Then) {
-            Then.onTheBookingSrvListGenerated.onTable().iCheckCreate({ visible: true });
-            // Then.onTheBookingSrvListGenerated.onTable().iPressCreate();
-            // Then.onTheBookingSrvListGenerated.onTable().iPressDelete();
-            Then.onTheBookingSrvListGenerated.onTable().iCheckDelete({ visible: true });
-            // Then.onTheBookingSrvListGenerated.onTable().iPressAction("Cancel");
-            Then.onTheBookingSrvListGenerated.onTable().iCheckAction("Cancel", { enabled: false });
-            // Then.onTheBookingSrvListGenerated.onTable().iPressAction("Discount");
-            Then.onTheBookingSrvListGenerated.onTable().iCheckAction("Discount", { enabled: true });
-            Then.onTheBookingSrvListGenerated.onTable().iCheckColumns(undefined, {"6":{"header":"Price Chart"},"8":{"header":"Rating"},"9":{"header":"Completion"},"BookingId":{"header":"Booking ID"},"CustomerId":{"header":"Customer"},"BookingDate":{"header":"Booking Date"},"OverallStatus":{"header":"Status"},"Priority":{"header":"Priority"},"TotalPrice":{"header":"Total Price"},"ConfirmFlag":{"header":"Confirmed"},"Description":{"header":"Description"},"CustomerName":{"header":"Contact"}});
-
+            Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckCreate({ visible: true });
+            // When.onTheBookingSrvListGenerated.onTable(defaultTableId).iPressCreate();
+            // When.onTheBookingSrvListGenerated.onTable(defaultTableId).iPressDelete();
+            Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckDelete({ visible: true });
+            // When.onTheBookingSrvListGenerated.onTable(defaultTableId).iPressAction("Cancel");
+            Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckAction("Cancel", { enabled: false });
+            // When.onTheBookingSrvListGenerated.onTable(defaultTableId).iPressAction("Discount");
+            Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckAction("Discount", { enabled: true });
+            Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckColumns(undefined, {"6":{"header":"Price Chart"},"8":{"header":"Rating"},"9":{"header":"Completion"},"BookingId":{"header":"Booking ID"},"CustomerId":{"header":"Customer"},"BookingDate":{"header":"Booking Date"},"OverallStatus":{"header":"Status"},"Priority":{"header":"Priority"},"TotalPrice":{"header":"Total Price"},"ConfirmFlag":{"header":"Confirmed"},"Description":{"header":"Description"},"CustomerName":{"header":"Contact"}});
         });
-
-
 
         opaTest("Navigate to ObjectPage", function (Given, When, Then) {
             // Note: this test will fail if the ListReport page doesn't show any data
-            
             When.onTheBookingSrvListGenerated.onFilterBar().iExecuteSearch();
-            
-            Then.onTheBookingSrvListGenerated.onTable().iCheckRows();
-
-            When.onTheBookingSrvListGenerated.onTable().iPressRow(0);
+            Then.onTheBookingSrvListGenerated.onTable(defaultTableId).iCheckRows();
+            When.onTheBookingSrvListGenerated.onTable(defaultTableId).iPressRow(0);
             Then.onTheBookingSrvObjectPageGenerated.iSeeThisPage();
-
         });
 
-        opaTest("Teardown", function (Given, When, Then) { 
+        opaTest("Teardown", function (Given, When, Then) {
             // Cleanup
             Given.iTearDownMyApp();
         });

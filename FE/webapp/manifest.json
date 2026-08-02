@@ -1,7 +1,7 @@
 {
   "_version": "1.83.1",
   "sap.app": {
-    "id": "fasttrack.booking",
+    "id": "fasttrack.fasttrack",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -12,8 +12,8 @@
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap/generator-fiori:lrop",
-      "version": "1.29.0",
-      "toolsId": "49595f1e-8adf-46f2-b57c-f552c96b5e12"
+      "version": "1.30.0",
+      "toolsId": "ac934716-75ad-4465-8d97-d6084ae4962f"
     },
     "dataSources": {
       "annotation": {
@@ -70,7 +70,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "fasttrack.booking.i18n.i18n"
+          "bundleName": "fasttrack.fasttrack.i18n.i18n"
         }
       },
       "": {
@@ -122,6 +122,17 @@
                 "BookingSrv": {
                   "detail": {
                     "route": "BookingSrvObjectPage"
+                  }
+                }
+              },
+              "content": {
+                "header": {
+                  "actions": {
+                    "GetFilterAction": {
+                      "id": "btnGetFilter",
+                      "text": "Get Filter",
+                      "press": "fasttrack.fasttrack.ext.controller.ListReportExt.onGetFilter"
+                    }
                   }
                 }
               },

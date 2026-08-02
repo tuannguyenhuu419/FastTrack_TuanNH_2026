@@ -4,13 +4,13 @@ strict ( 2 );
 with draft;
 
 define behavior for ZI_BOOKING_T35 alias Booking
-persistent table zbooking_T35
+//persistent table zbooking_T35
 draft table zbooking_T35_d
 lock master
 total etag LastChangedAt
 authorization master ( global )
 etag master LocalLastChangedAt
-
+with unmanaged save
 // Numbering = cấp key KHI NÀO & thế nào:
 //   I. Interaction phase:
 //      1. Managed(UUID): field ( numbering : managed ) Key;  (framework sinh UUID, không handler)
@@ -23,11 +23,17 @@ early numbering
   create;
   update;
   delete;
+
+  // 1. Nút Process: Tương tác với các dòng được chọn (Instance Action)
+  action ProcessData result [1] $self;
+
+  // 2. Nút GetFilter: Không cần chọn dòng (Static Action) và Gọi ra Dialog (Parameter)
+  static action GetFilter parameter ZA_FILTER_PARAM_T35 result [1] $self;
+
   action acceptBooking result [1] $self;
   action cancelBooking result [1] $self;
 
-//  action applyDiscount parameter ZA_BOOKING_DISC_T35 result [1] $self;
-
+  action applyDiscount parameter ZA_BOOKING_DISC_T35 result [1] $self;
 
   field ( readonly )
   BookingId,
@@ -50,7 +56,7 @@ early numbering
 
   draft determine action Prepare { }
 
-  mapping for zbooking_T35
+    mapping for zbooking_T35
     {
       BookingId          = booking_id;
       CustomerId         = customer_id;
@@ -73,7 +79,8 @@ early numbering
 
 //===================== CHILD: BookingItem =====================
 define behavior for ZI_ITEM_T35 alias BookingItem         // alias <alias_name>
-persistent table zbkitem_T35
+//persistent table zbkitem_T35\
+with unmanaged save
 draft table zbkitem_T35_d
 lock dependent by _bookingHeader              // khoá con ĐI THEO khoá cha
 authorization dependent by _bookingHeader     // quyền con THỪA HƯỞNG từ cha -> KHÔNG cần handler riêng
@@ -87,7 +94,7 @@ etag master LocalLastChangedAt                // item có timestamp riêng -> et
   field ( mandatory ) ProductId, Quantity;
 
   association _BookingHeader { with draft; }
-
+  determination calculateTotalPrice on modify { field quantity, itemprice; }
   mapping for zbkitem_T35
     {
       BookingId          = booking_id;
@@ -100,4 +107,5 @@ etag master LocalLastChangedAt                // item có timestamp riêng -> et
       LastChangedAt      = last_changed_at;
       LocalLastChangedAt = local_last_changed_at;
     }
+
 }

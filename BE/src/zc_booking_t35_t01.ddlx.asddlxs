@@ -21,11 +21,11 @@ annotate entity ZC_BOOKING_T35 with
   BookingDate;
 
   @EndUserText.label: 'Total Price'
-  @UI.lineItem:       [{ position: 50 }]
+  //@UI.lineItem:       [{ position: 50 }]
   TotalPrice;
 
   @EndUserText.label: 'Description'
-  @UI.lineItem:       [{ position: 90, importance: #LOW }]
+  //@UI.lineItem:       [{ position: 90, importance: #LOW }]
   Description;
 
 }

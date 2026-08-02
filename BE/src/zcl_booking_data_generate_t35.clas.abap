@@ -43,7 +43,12 @@ CLASS zcl_booking_data_generate_t35 IMPLEMENTATION.
         phone = '+84 236 222 3333' )
       ( customer_id = 'C003' customer_name = 'Initech JSC'
         email = 'hello@initech.example' city = 'HCMC'
-        phone = '+84 28 9999 8888' ) ) ).
+        phone = '+84 28 9999 8888' )
+      ( customer_id = 'C004' customer_name = 'Ho Gooong'
+        email = 'HoGoong@boke.com'   city = 'Vinh City'
+        phone = '+84 33 1234 5678' )
+
+        ) ).
     out->write( |Customers modified: { sy-dbcnt } rows| ).
 
     "============================================================

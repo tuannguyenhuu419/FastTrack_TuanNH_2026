@@ -17,7 +17,7 @@ annotate entity ZC_BOOKING_T35 with
   ConfirmFlag;
 
   // T10.1 - RADIO GROUP REPLACEMENT:
-  // 3 fixed values (Low/Medium/High) of domain ZD_PRIORITY_FS01 in ONE
+  // 3 fixed values (Low/Medium/High) of domain ZD_PRIORITY_T35 in ONE
   // dropdown instead of 3 radio buttons.
   // (Priority column itself is placed by _T07 with criticality colors;
   //  here we only add filter + value help.)

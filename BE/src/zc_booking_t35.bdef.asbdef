@@ -10,6 +10,10 @@ define behavior for ZC_BOOKING_T35 alias Booking
 
   use action acceptBooking;
   use action cancelBooking;
+  use action applyDiscount;
+
+  use action GetFilter;
+  use action ProcessData;
 
   use action Edit;
   use action Activate;

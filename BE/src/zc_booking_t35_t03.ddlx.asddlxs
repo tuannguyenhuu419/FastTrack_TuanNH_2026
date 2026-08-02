@@ -12,7 +12,8 @@ annotate entity ZC_BOOKING_T35 with
   CustomerId;
 
   @UI.selectionField: [{ position: 20 }]
-  @Consumption.filter.selectionType: #INTERVAL
+  //@Consumption.filter.selectionType: #INTERVAL
+  @Consumption.filter.selectionType: #RANGE // Hoặc #INTERVAL nếu chỉ muốn Từ ngày - Đến ngày DateField;
   BookingDate;
 
   @UI.selectionField: [{ position: 30 }]

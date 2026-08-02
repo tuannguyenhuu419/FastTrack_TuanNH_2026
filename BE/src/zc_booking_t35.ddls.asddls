@@ -13,6 +13,7 @@ define root view entity ZC_BOOKING_T35
       @ObjectModel.text.element: ['CustomerName']
       CustomerId,
 
+      @UI.selectionField: [{ position: 10 }]
       BookingDate,
       Description,
 

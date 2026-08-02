@@ -32,7 +32,7 @@ sap.ui.define(['sap/fe/test/ObjectPage', 'sap/ui/test/actions/Press'], function(
 
     return new ObjectPage(
         {
-            appId: 'fasttrack.booking',
+            appId: 'fasttrack.fasttrack',
             componentId: 'BookingItemSrvObjectPage',
             contextPath: '/BookingSrv/_BookingItem'
         },

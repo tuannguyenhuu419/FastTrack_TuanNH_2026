@@ -37,10 +37,10 @@ sap.ui.define([
             // Ensure the opened entity is not in Draft state before uncommenting
             // Then.onTheBookingSrvObjectPageGenerated.onHeader().iCheckEdit({ visible: true });
             // When.onTheBookingSrvObjectPageGenerated.onHeader().iPressEdit();
-            Then.onTheBookingSrvObjectPageGenerated.onHeader().iCheckAction("Accept" /* , { enabled: true } */);
-            // When.onTheBookingSrvObjectPageGenerated.onHeader().iPressAction("Accept");
-            Then.onTheBookingSrvObjectPageGenerated.onHeader().iCheckAction("Cancel" /* , { enabled: true } */);
-            // When.onTheBookingSrvObjectPageGenerated.onHeader().iPressAction("Cancel");
+            Then.onTheBookingSrvObjectPageGenerated.onHeader().iCheckAction({ service: "com.sap.gateway.srvd.zsv_booking_t35.v0001", action: "acceptBooking", unbound: false } /* , { enabled: true } */);
+            // When.onTheBookingSrvObjectPageGenerated.onHeader().iPressAction({ service: "com.sap.gateway.srvd.zsv_booking_t35.v0001", action: "acceptBooking", unbound: false });
+            Then.onTheBookingSrvObjectPageGenerated.onHeader().iCheckAction({ service: "com.sap.gateway.srvd.zsv_booking_t35.v0001", action: "cancelBooking", unbound: false } /* , { enabled: true } */);
+            // When.onTheBookingSrvObjectPageGenerated.onHeader().iPressAction({ service: "com.sap.gateway.srvd.zsv_booking_t35.v0001", action: "cancelBooking", unbound: false });
         });
 
         opaTest("Check header facets of the Object Page", function (Given, When, Then) {
@@ -53,6 +53,23 @@ sap.ui.define([
             Then.onTheBookingSrvObjectPageGenerated.iCheckNumberOfSections(2);
             When.onTheBookingSrvObjectPageGenerated.iPressSectionIconTabFilterButton("General");
             Then.onTheBookingSrvObjectPageGenerated.iCheckSection({ section: "General" });
+            //When.onTheBookingSrvObjectPageGenerated.iGoToSection({ section: "General", subSection: "BasicData" });
+            Then.onTheBookingSrvObjectPageGenerated.iCheckSubSection({ section: "BasicData" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "BasicData" }).iCheckField({ property: "BookingId" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "BasicData" }).iCheckField({ property: "CustomerId" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "BasicData" }).iCheckField({ property: "BookingDate" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "BasicData" }).iCheckField({ property: "Description" });
+            //When.onTheBookingSrvObjectPageGenerated.iGoToSection({ section: "General", subSection: "StatusData" });
+            Then.onTheBookingSrvObjectPageGenerated.iCheckSubSection({ section: "StatusData" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "StatusData" }).iCheckField({ property: "OverallStatus" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "StatusData" }).iCheckField({ property: "Priority" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "StatusData" }).iCheckField({ property: "ConfirmFlag" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "StatusData" }).iCheckField({ property: "CustomerRating" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "StatusData" }).iCheckField({ property: "CompletionPct" });
+            //When.onTheBookingSrvObjectPageGenerated.iGoToSection({ section: "General", subSection: "CustomerData" });
+            Then.onTheBookingSrvObjectPageGenerated.iCheckSubSection({ section: "CustomerData" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "CustomerData" }).iCheckField({ property: "CustomerEmail" });
+            Then.onTheBookingSrvObjectPageGenerated.onForm({ section: "CustomerData" }).iCheckField({ property: "CustomerCity" });
             When.onTheBookingSrvObjectPageGenerated.iPressSectionIconTabFilterButton("Items");
             Then.onTheBookingSrvObjectPageGenerated.iCheckSection({ section: "Items" });
             Then.onTheBookingSrvObjectPageGenerated.onTable({ property: "_BookingItem" }).iCheckColumns(undefined, {"ItemId":{"header":"Item"},"ProductId":{"header":"Product"},"Quantity":{"header":"Quantity"},"ItemPrice":{"header":"Item Price"}});

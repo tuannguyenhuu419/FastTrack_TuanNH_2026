@@ -3,7 +3,7 @@ sap.ui.define(
     function (Component) {
         "use strict";
 
-        return Component.extend("fasttrack.booking.Component", {
+        return Component.extend("fasttrack.fasttrack.Component", {
             metadata: {
                 manifest: "json"
             }
